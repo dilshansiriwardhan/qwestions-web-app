@@ -1,0 +1,25 @@
+/* Smartphones (Portrait and smaller devices) */
+@media (max-width: 575px) {
+    /* Styles for smartphones */
+  }
+  
+  /* Tablets (Portrait) */
+  @media (min-width: 576px) and (max-width: 767px) {
+    /* Styles for small tablets */
+  }
+  
+  /* Tablets (Landscape) */
+  @media (min-width: 768px) and (max-width: 991px) {
+    /* Styles for tablets and small laptops */
+  }
+  
+  /* Laptops/Desktops */
+  @media (min-width: 992px) and (max-width: 1199px) {
+    /* Styles for laptops/desktops */
+  }
+  
+  /* Large Screens */
+  @media (min-width: 1200px) {
+    /* Styles for large desktops */
+  }
+  

@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+body{
+    font-family: "Poppins", serif;
+    font-style: normal;
+}
+
+.webkit-center{
+    text-align: -webkit-center;
+}
+
+:root{
+    --primary: #4C8DF6;
+    --secondary: #7FCFFF;
+    --accent: #00FF87;
+    --neutral: #1E1F20;
+    --neutral-content: #BDC1C6;
+
+    --content2: #444746;
+    --base-200: #1E1F20;
+    --base-300: #131314;
+    --base-content: #828689;
+}
+
+/* For WebKit-based browsers */
+::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+}
+::-webkit-scrollbar-track {
+    background: #0b0b0c;
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* For Firefox */
+.scrollbar{
+    scrollbar-width: thin;
+    scrollbar-color: #888 #f1f1f1;
+}
+

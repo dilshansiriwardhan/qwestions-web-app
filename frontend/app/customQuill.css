@@ -1,0 +1,39 @@
+
+.ql-toolbar .ql-stroke {
+    stroke: #7FCFFF; 
+  }
+  
+  .ql-toolbar .ql-fill {
+    fill: #7FCFFF; 
+  }
+  
+  .ql-picker-label::before{
+    color: #7FCFFF;
+  }
+
+  .ql-editor.ql-blank::before{
+    color: whitesmoke;
+    font-style: normal;
+  }
+
+  .quill{
+    background-color: #27272a;
+    border-radius: 1rem;
+  }
+
+  .ql-toolbar.ql-snow , .ql-container.ql-snow{
+    border: none;
+  }
+
+  .ql-editor {
+    font-size: 1rem;
+    font-family: "Poppins", serif;
+    font-weight: 500;
+    font-style: normal;
+  }
+
+  .ql-editor img {
+    width: 15rem; 
+    max-width: 100%; 
+    height: auto; 
+  }
