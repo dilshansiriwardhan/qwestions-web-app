@@ -17,7 +17,7 @@ const app = express();
 // middleware
 app.options('*', cors());
 app.use(cors({
-  origin: 'https://qwestions-web-app-izue.vercel.app',
+  origin: '*',
   methods: ['GET', 'POST'],
 }));
 
