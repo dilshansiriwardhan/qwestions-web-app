@@ -16,12 +16,6 @@ const SignIn = () => {
 			<h1 className='text-2xl font-bold'>Enter As a</h1>
 			<div className='flex flex-col gap-5 content-center max-w-[9rem]'>
 				<Button
-					color='default'
-					onPress={() => handleNavigation('/test')}
-				>
-					Exam
-				</Button>
-				<Button
 					color='primary'
 					onPress={() => handleNavigation('/overview')}
 				>
