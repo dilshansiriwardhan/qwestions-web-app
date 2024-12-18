@@ -19,7 +19,7 @@ const Question = ({ question, answers, index }: _Question) => {
 				<h1>Question {index}</h1>
 				<h3 className='mt-[1rem]'>{question}</h3>
 				<div className='ml-[3rem] mt-[1rem]'>
-					<div className='grid grid-cols-2 grid-rows-2 gap-1'>
+					<div className='grid grid-rows-4 md:grid-cols-2 md:grid-rows-2 gap-1'>
 						{answers.map((answer, key) => (
 							<div key={key}>
 								<div>
