@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const express = require('express');
 const dotenv = require('dotenv');
-// const cors = require('cors');
+const cors = require('cors');
 const connectDB = require('./config/db');
 
 const questionRoutes = require('./routes/questions.routes');
@@ -15,11 +15,11 @@ connectDB();
 
 const app = express();
 // middleware
-// app.options('*', cors());
-// app.use(cors({
-//   origin: '*',
-//   methods: ['GET', 'POST'],
-// }));
+app.use(cors({
+  origin: 'https://qwestions-web-app-izue.vercel.app',
+  methods: ['GET', 'POST'],
+}));
+app.options('*', cors()); 
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
