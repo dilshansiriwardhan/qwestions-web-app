@@ -1,6 +1,6 @@
 'use client';
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'next/navigation';
+import React, { Suspense, useEffect, useState } from 'react';
+import { useSearchParams } from 'next/navigation';
 import Question from './Question';
 import { Button } from '@nextui-org/react';
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
@@ -25,16 +25,17 @@ type Question = {
 	answers: Answer[];
 };
 
-const Exam = () => {
-	const { id: examId } = useParams();
+const ExamContent = () => {
+	const searchParams = useSearchParams();
+	const examId = searchParams.get('id');
 	const [examName, setExamName] = useState('');
 	const [error, setError] = useState('');
 	const [questions, setQuestions] = useState<Question[]>([]);
 	const [questionNum, setQuestionNum] = useState(1);
 
-	const setNum = (num:number) => {
+	const setNum = (num: number) => {
 		setQuestionNum(num);
-	}
+	};
 	useEffect(() => {
 		console.log(questionNum);
 	}, [questionNum]);
@@ -123,8 +124,8 @@ const Exam = () => {
 
 					{/* Display the current question */}
 					<div className='flex w-full justify-center my-[5rem] relative'>
-						{questions.length > 0 && questions[questionNum - 1] &&(
-							<div className=' w-[55rem]' >
+						{questions.length > 0 && questions[questionNum - 1] && (
+							<div className=' w-[55rem]'>
 								<Question
 									index={questionNum}
 									question={
@@ -183,5 +184,11 @@ const Exam = () => {
 		</div>
 	);
 };
+
+const Exam = () => (
+	<Suspense fallback={<div>Loading...</div>}>
+		<ExamContent />
+	</Suspense>
+);
 
 export default Exam;
