@@ -1,12 +1,18 @@
 {
     "version": 2,
+    "builds": [
+      {
+        "src": "package.json",
+        "use": "@vercel/node"
+      }
+    ],
     "routes": [
       {
-        "src": "/api/exams/(.*)",
+        "src": "/api/exam/(.*)",
         "dest": "routes/exams.routes.js"
       },
       {
-        "src": "/api/questions/(.*)",
+        "src": "/api/question/(.*)",
         "dest": "routes/questions.routes.js"
       }
     ]
