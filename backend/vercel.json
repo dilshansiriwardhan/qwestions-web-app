@@ -15,16 +15,6 @@
         "src": "/api/questions/(.*)",
         "dest": "routes/questions.routes.js"
       }
-    ],
-    "functions": {
-    "api/**/*.js": {
-      "runtime": "nodejs16.x",
-      "cors": {
-        "origin": "https://qwestions-web-app-izue.vercel.app",
-        "methods": ["GET", "POST"],
-        "allowedHeaders": ["Content-Type"]
-      }
-    }
-  }
+    ]
   }
   
