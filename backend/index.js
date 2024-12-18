@@ -16,7 +16,10 @@ connectDB();
 const app = express();
 
 // middleware
-app.use(cors());
+app.use(cors({
+  origin: process.env.BACKEND_URL,
+  methods: ['GET', 'POST'],
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
