@@ -52,7 +52,7 @@ const Join = () => {
 								className='flex flex-row items-center max-w-[20rem] justify-between py-2 content-center'
 							>
 								<div>{exam.examName}</div>
-								<Link href={`test?id=${exam._id}`}>
+								<Link href={`test/${exam._id}`}>
 									<OutlineButton
 										name='Join'
 										size='sm'
