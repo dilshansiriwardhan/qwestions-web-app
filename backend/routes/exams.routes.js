@@ -36,7 +36,6 @@ router.post('/', async (req, res) => {
   
 // GET: Get all exams
 router.get('/', async (req, res) => {
-  res.set('Access-Control-Allow-Origin', '*'); 
   try {
     const exams = await Exam.find();
     res.status(200).json(exams);
