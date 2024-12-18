@@ -18,7 +18,8 @@ const app = express();
 app.use(cors({
   origin: 'https://qwestions-web-app-izue.vercel.app',
   methods: ['GET', 'POST'],
-  allowedHeaders:['Content-Type']
+  allowedHeaders:['Content-Type'],
+  credentials:true
 }));
 app.options('*', cors()); 
 
