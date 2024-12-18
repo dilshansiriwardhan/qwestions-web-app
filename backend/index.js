@@ -14,13 +14,14 @@ dotenv.config();
 connectDB();
 
 const app = express();
-
+console.log(process.env.BACKEND_URL);
 // middleware
 app.use(cors({
   origin: process.env.BACKEND_URL,
   methods: ['GET', 'POST'],
   allowedHeaders: ['Content-Type'],
 }));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
