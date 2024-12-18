@@ -16,7 +16,7 @@ connectDB();
 const app = express();
 // middleware
 app.use(cors({
-  origin: "https://qwestions-web-app-izue.vercel.app",
+  origin: 'https://qwestions-web-app-izue.vercel.app',
   methods: ['GET', 'POST'],
 }));
 
