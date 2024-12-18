@@ -14,10 +14,9 @@ dotenv.config();
 connectDB();
 
 const app = express();
-console.log(process.env.BACKEND_URL);
 // middleware
 app.use(cors({
-  origin: process.env.BACKEND_URL,
+  origin: "https://qwestions-web-app-izue.vercel.app",
   methods: ['GET', 'POST'],
   allowedHeaders: ['Content-Type'],
 }));
