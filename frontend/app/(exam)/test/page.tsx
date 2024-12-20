@@ -105,7 +105,7 @@ const ExamContent = () => {
 										></Image>
 									</Link>
 								</div>
-								<h3 className='text-white pt-2'>Elon Musk</h3>
+								<h3 className='text-white pt-2'>Dilshan Siriwardhane</h3>
 							</div>
 						</div>
 					</div>

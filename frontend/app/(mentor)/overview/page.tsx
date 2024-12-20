@@ -15,6 +15,8 @@ const Overview = () => {
 								<PlusIcon className='size-6 text-white' />
 							</div>
 						</div>
+						<div className='w-[14rem] absolute '>
+						</div>
 					</div>
 					<div className='bg-content3 rounded-2xl  lg:rounded-3xl md:rounded-xl relative'>
 						<div className='w-full flex flex-col p-6 absolute h-full'>
@@ -33,24 +35,20 @@ const Overview = () => {
 					<div className='bg-content3 rounded-2xl  lg:rounded-3xl md:rounded-xl relative'>
 						<div className='w-full flex flex-col p-6 absolute h-full'>
 							<div className='flex justify-between'>
-								<h1>Revenue</h1>
-								<span className='text-green-400 flex gap-1'>
-									<ArrowUpCircleIcon
-										style={{ transform: 'rotate(45deg)' }}
-										className='size-6 text-green-400'
-									/>{' '}
-									24%
-								</span>
+								<h1>Learner Progress</h1>
 							</div>
 
 							<div className='absolute bottom-6'>
-								<h1 className='text-5xl'>
-									$18
-									<span className='text-primary text-5xl font-black'>
-										K
-									</span>
+								<span className='text-green-400 flex gap-1 text-5xl'>
+									<ArrowUpCircleIcon
+										style={{ transform: 'rotate(45deg)' }}
+										className='size-7 text-green-400'
+									/>{' '}
+									24%
+								</span>
+								<h1 className='text-content2 text-medium'>
+									This Month (Apr 2024)
 								</h1>
-								<h1 className='text-content2 text-medium'>This Month (Apr 2024)</h1>
 							</div>
 						</div>
 					</div>
