@@ -2,6 +2,7 @@
 import React from 'react';
 import Layout from '@/components/layout';
 import { ArrowUpCircleIcon, PlusIcon } from '@heroicons/react/24/outline';
+import Chart from './Chart';
 
 const Overview = () => {
 	return (
@@ -15,7 +16,23 @@ const Overview = () => {
 								<PlusIcon className='size-6 text-white' />
 							</div>
 						</div>
-						<div className='w-[14rem] absolute '>
+						<div className='w-[7rem] absolute top-[4.5rem] left-[1rem] gap-4'>
+							<Chart />
+						</div>
+						
+						<div className='absolute top-[6rem] left-[9rem] text-xs'>
+							<div className='flex items-center gap-2'>
+								<div className='bg-[#292929] w-3 h-3'></div>
+								Well Performed
+							</div>
+							<div className='flex items-center gap-2'>
+								<div className='bg-[#444746] w-3 h-3'></div>
+								Medium Performed
+							</div>
+							<div className='flex items-center gap-2'>
+								<div className='bg-[#d9d9d9] w-3 h-3'></div>
+								Low Performed
+							</div>
 						</div>
 					</div>
 					<div className='bg-content3 rounded-2xl  lg:rounded-3xl md:rounded-xl relative'>
@@ -53,9 +70,7 @@ const Overview = () => {
 						</div>
 					</div>
 					<div className='bg-content3 rounded-2xl  lg:rounded-3xl row-start-3 md:row-start-auto col-span-2 md:rounded-xl'></div>
-					<div className='bg-white rounded-2xl  lg:rounded-3xl md:rounded-xl relative'>
-						
-					</div>
+					<div className='bg-white rounded-2xl  lg:rounded-3xl md:rounded-xl relative'></div>
 				</div>
 			</Layout>
 		</>

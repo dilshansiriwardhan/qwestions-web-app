@@ -33,7 +33,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts"
-  ],
+, "app/(mentor)/overview/Chart.jsx"  ],
   "exclude": [
     "node_modules"
   ]
