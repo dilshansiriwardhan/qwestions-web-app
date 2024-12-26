@@ -18,8 +18,8 @@ const data = {
       borderColor: 'rgb(76 141 246)',
       hoverBorderColor: 'rgb(76 141 246)',
       borderRadius: 17,
-      borderWidth:2,
-      cutout: '75%'
+      borderWidth:4,
+      cutout: '73%'
 
     },
   ],

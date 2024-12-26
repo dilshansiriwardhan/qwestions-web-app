@@ -22,15 +22,15 @@ const Overview = () => {
 						
 						<div className='absolute top-[6rem] left-[9rem] text-xs'>
 							<div className='flex items-center gap-2'>
-								<div className='bg-[#292929] w-3 h-3'></div>
+								<div className='bg-[#292929] w-3 h-3 rounded-sm'></div>
 								Well Performed
 							</div>
 							<div className='flex items-center gap-2'>
-								<div className='bg-[#444746] w-3 h-3'></div>
+								<div className='bg-[#444746] w-3 h-3 rounded-sm'></div>
 								Medium Performed
 							</div>
 							<div className='flex items-center gap-2'>
-								<div className='bg-[#d9d9d9] w-3 h-3'></div>
+								<div className='bg-[#d9d9d9] w-3 h-3 rounded-sm'></div>
 								Low Performed
 							</div>
 						</div>

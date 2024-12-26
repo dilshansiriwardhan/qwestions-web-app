@@ -5,13 +5,21 @@ import logo from '@/public/logo.png';
 import avatar from '@/public/user-avatar.png';
 import NavLinks from '@/components/nav-links';
 import Link from 'next/link';
+import {getServerSession} from 'next-auth';
+import {options} from '../api/auth/[...nextauth]/options.jsx';
+import { redirect } from 'next/navigation';
 
-
-export default function Mentor({
+export default async function Mentor({
 	children,
 }: Readonly<{
 	children: React.ReactNode;
 }>) {
+	const session = await getServerSession(options);
+	
+	if(!session){
+		redirect('/api/auth/signin?callbackUrl=/overview')
+	}
+	
 	return (
 		<div className='flex flex-row'>
 			<div className='basis-1/5 bg-content3 h-screen hidden md:block pt-5 sm:text-xs'>
@@ -33,16 +41,26 @@ export default function Mentor({
 						<div className='flex flex-col items-center webkit-center text-center'>
 							<div className='absolute bottom-11'>
 								<div className='border-2 border-sky-500 rounded-full w-fit'>
+									
 									<Link href={'/dashboard'}>
 										<Image
-											src={avatar} // Path to your image file
+											src={session?.user?.image ? session?.user?.image : avatar}
 											alt='profile pic'
 											width={40}
+											height={40}
+											className='rounded-full'
 										></Image>
 									</Link>
 								</div>
-								<h3 className='text-white pt-2'>Dilshan Siriwardhane</h3>
+								<h3 className='text-white pt-2'>{session?.user?.name}</h3>
 							</div>
+							{session ? (
+								<Link href='/api/auth/signout?callbackUrl=/' >Logout</Link >
+							):(
+								<Link href='/api/auth/signin?callbackUrl=/overview' >LogIn</Link >
+
+							)}
+							
 						</div>
 					</div>
 				</div>

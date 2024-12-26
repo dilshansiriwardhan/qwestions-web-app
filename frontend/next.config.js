@@ -10,6 +10,16 @@ const nextConfig = {
 		];
 	},
    reactStrictMode: false,
+   images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "lh3.googleusercontent.com", // Google profile picture domain
+        port: "", // Leave empty if no specific port
+        pathname: "/**", // Allow all paths
+      },
+    ],
+  },
 };
 
 export default nextConfig;
