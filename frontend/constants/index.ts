@@ -28,3 +28,8 @@ export const studentLinks = [
     {name: 'Join a Test' , href: '/join', icon:PuzzlePieceIcon},
     {name: 'Last Tests' , href: '/last-tests', icon:DocumentTextIcon},
 ];
+
+export const adminLinks = [
+    {name: 'Mentors' , href: '/admin/mentor' , icon:ChartPieIcon},
+    {name: 'Organizations' , href: '/admin/organization' , icon:PencilSquareIcon},
+];

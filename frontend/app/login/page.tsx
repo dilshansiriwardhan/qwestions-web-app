@@ -1,32 +1,32 @@
 'use client';
-
-import React from 'react';
-import { Button } from '@nextui-org/button';
+import React, { useEffect, useState } from 'react';
+// import { Button } from '@nextui-org/button';
 import { useRouter } from 'next/navigation';
-import Link from 'next/link';
+// import Link from 'next/link';
+import {
+	SignInButton,
+	SignedIn,
+	SignedOut,
+	UserButton,
+	useSession,
+	useUser,
+} from '@clerk/nextjs';
 
 const SignIn = () => {
+	const session  = useUser();
 	const router = useRouter();
-
-	const handleNavigation = (path: string) => {
-		router.push(path);
-	};
-
+	console.log(session);
+	useEffect(() => {
+		if (session.isSignedIn) {
+			router.push('/dashboard');
+		}
+	}, [session]);
 	return (
 		<div className='flex flex-col gap-10 justify-center items-center h-dvh'>
-			<h1 className='text-2xl font-bold'>Enter As a</h1>
-			<div className='flex flex-col gap-5 content-center max-w-[9rem]'>
-				<Link href='/api/auth/signin?callbackUrl=/overview'>
-					<Button color='primary'>Mentor</Button>
-				</Link>
-				<Link href='/api/auth/signin?callbackUrl=/join'>
-					<Button
-						color='secondary'
-						onPress={() => handleNavigation('')}
-					>
-						Student
-					</Button>
-				</Link>
+			<div>
+				<SignedOut>
+					<SignInButton mode='modal' />
+				</SignedOut>
 			</div>
 		</div>
 	);

@@ -2,18 +2,25 @@
 import { ForwardRefExoticComponent, SVGProps } from 'react';
 import React from 'react';
 import Link from 'next/link';
-import { linkList, mentorLinks, studentLinks } from '@/constants/index';
+import {
+	linkList,
+	mentorLinks,
+	studentLinks,
+	adminLinks,
+} from '@/constants/index';
 
 interface NavProps {
-	type: 'mentor' | 'student';
+	type: 'mentor' | 'student' | 'admin' | 'organization';
 }
 const NavLinks = ({ type }: NavProps) => {
 	let links = linkList;
 
 	if (type === 'mentor') {
 		links = mentorLinks;
-	} else {
+	} else if (type === 'student') {
 		links = studentLinks;
+	} else if (type === 'admin') {
+		links = adminLinks;
 	}
 
 	return (

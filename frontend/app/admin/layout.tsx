@@ -1,15 +1,18 @@
+/* eslint-disable */
 import '../globals.css';
 import Image from 'next/image';
 import logo from '@/public/logo.png';
+import avatar from '@/public/user-avatar.png';
 import NavLinks from '@/components/nav-links';
-import { currentUser } from '@clerk/nextjs/server';
 import { UserButton } from '@clerk/nextjs';
+import { currentUser } from '@clerk/nextjs/server';
 
-export default async function Student({
+export default async function Mentor({
 	children,
 }: Readonly<{
 	children: React.ReactNode;
 }>) {
+	
 	const user = await currentUser();
 
 	return (
@@ -26,12 +29,12 @@ export default async function Student({
 
 						<div className='mt-8'>
 							<div>
-								<NavLinks type='student' />
+								<NavLinks type='admin' />
 							</div>
 						</div>
 
 						<div className='flex flex-col items-center webkit-center text-center'>
-                     <div className='absolute bottom-11'>
+						<div className='absolute bottom-11'>
 								<div>
 									<UserButton
 										appearance={{
