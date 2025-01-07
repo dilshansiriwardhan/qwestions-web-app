@@ -27,6 +27,7 @@ const SignIn = () => {
 				<SignedOut>
 					<SignInButton mode='modal' />
 				</SignedOut>
+				<SignedIn></SignedIn>
 			</div>
 		</div>
 	);

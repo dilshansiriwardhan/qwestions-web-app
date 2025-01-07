@@ -1,14 +1,24 @@
 'use client';
 import React, { useEffect, useState } from 'react';
 import { Input } from '@nextui-org/input';
-import { Button, getKeyValue, Table, TableBody, TableCell, TableColumn, TableHeader, TableRow } from '@nextui-org/react';
+import {
+	Button,
+	getKeyValue,
+	Table,
+	TableBody,
+	TableCell,
+	TableColumn,
+	TableHeader,
+	TableRow,
+} from '@nextui-org/react';
 
 type RowType = {
 	key: number;
-	id:string;
-	role:string;
+	id: string;
+	role: string;
+	userName: string;
+	email: string;
 };
-
 
 type ColumnType = {
 	key: keyof RowType;
@@ -59,18 +69,28 @@ const Mentor = () => {
 			);
 
 			const data = await users.json();
+			
+			if (data) {
+				const usersArray = data.map(
+					(
+						user: {
+							_id: string;
+							role: string;
+							userName: string;
+							email: string;
+						},
+						index: number
+					) => ({
+						key: index,
+						id: user._id,
+						role: user.role,
+						userName: user.userName,
+						email: user.email,
+					})
+				);
 
-			if(data){
-        const usersArray = data.map(
-          (user: { _id: string; role: string }, index: number) => ({
-            key: index,
-            id: user._id,
-            role: user.role,
-          })
-        );
-  
-        setUsers(usersArray);
-      }
+				setUsers(usersArray);
+			}
 		} catch (error) {
 			console.log(error);
 		}
@@ -141,7 +161,7 @@ const Mentor = () => {
 			</div>
 			<div>
 				<Table aria-label='Example table with dynamic content'>
-					 <TableHeader columns={columns}>
+					<TableHeader columns={columns}>
 						{(column) => (
 							<TableColumn key={column.key}>
 								{column.label}
@@ -158,7 +178,7 @@ const Mentor = () => {
 								)}
 							</TableRow>
 						)}
-					</TableBody> 
+					</TableBody>
 				</Table>
 			</div>
 		</div>
@@ -168,16 +188,20 @@ const Mentor = () => {
 export default Mentor;
 
 const columns = [
-  {
-    key: "name",
-    label: "Name",
-  },
-  {
-    key: "id",
-    label: "Id",
-  },
-  {
-    key: "role",
-    label: "Role",
-  },
+	{
+		key: 'id',
+		label: 'Id',
+	},
+	{
+		key: 'userName',
+		label: 'Name',
+	},
+	{
+		key: 'role',
+		label: 'Role',
+	},
+	{
+		key: 'email',
+		label: 'Email',
+	},
 ];

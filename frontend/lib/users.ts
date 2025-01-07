@@ -3,10 +3,27 @@ import { User } from '@prisma/client'
 
 export async function createUser(data: any) {
   try {
-    const user = await prisma.user.create({ data })
-    return { user }
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/user`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        
+        body: JSON.stringify(data),
+      }
+    );
+    if (response.ok) {
+      console.log('Data saved successfully!');
+    } else {
+      const errorDetails = await response.text();
+      console.error(
+        `Failed to save data! Status: ${response.status}, Response: ${errorDetails}`
+      );
+    }
   } catch (error) {
-    return { error }
+    console.error('Error:', error);
   }
 }
 

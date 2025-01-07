@@ -3,17 +3,32 @@ import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth, useUser } from '@clerk/nextjs';
 
+type UserData = {
+    clerkUserId?: string | null;
+    email?: string | null;
+    userName?: string | null;
+};
+
 export default function Dashboard() {
 	const { user } = useUser();
 	const router = useRouter();
 
-  const { getToken } = useAuth();
-	
+	const { getToken } = useAuth();
+	console.log(user);
+
+	let data:UserData;
+
+	if(user){
+		data = {
+			clerkUserId: user?.id,
+			email: user?.primaryEmailAddress?.emailAddress,
+			userName: user?.fullName,
+		};
+	}
+
 	const fetchUserRole = async () => {
 		try {
-
 			const token = await getToken();
-			console.log(token);
 			const response = await fetch(
 				`${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/user`,
 				{
@@ -22,14 +37,15 @@ export default function Dashboard() {
 						Authorization: `Bearer ${token}`,
 						'Content-Type': 'application/json',
 					},
+					body: JSON.stringify(data),
 				}
 			);
 
 			if (response.ok) {
 				const data = await response.json();
-				const { user} = data; 
-        const role = user.role;
-        console.log(data);
+				const { user } = data;
+				const role = user.role;
+				console.log(data);
 				if (role === 'student') {
 					router.push('/join');
 				} else if (role === 'mentor') {
@@ -52,10 +68,7 @@ export default function Dashboard() {
 
 	useEffect(() => {
 		fetchUserRole();
-	}, []);
-	
+	}, [user]);
 
 	return <div>Loading...</div>;
 }
-
-

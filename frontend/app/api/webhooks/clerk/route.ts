@@ -1,6 +1,7 @@
 import { Webhook } from 'svix';
 import { headers } from 'next/headers';
 import { WebhookEvent } from '@clerk/nextjs/server';
+import { createUser } from '@/lib/users';
 
 export async function POST(req: Request) {
 	const WEBHOOK_SECRET = process.env.CLERK_WEBHOOK_SECRET;
@@ -62,34 +63,14 @@ export async function POST(req: Request) {
 		const user = {
 			clerkUserId: id,
 			email: email_addresses[0].email_address,
-			...(first_name ? { name: first_name + last_name } : {}),
+			...(first_name ? { userName: `${first_name} ${last_name}` } : {}),
 			role: 'student',
+
 		};
-		// const fetch = await createUser(user)
-		// console.log(fetch)
-		try {
-			const response = await fetch(
-				`${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/user`,
-				{
-					method: 'POST',
-					headers: {
-						'Content-Type': 'application/json',
-					},
-					body: JSON.stringify(user),
-				}
-			);
-			if (response.ok) {
-				console.log('Data saved successfully!');
-			} else {
-				const errorDetails = await response.text(); // or response.json() if JSON response
-				console.error(
-					`Failed to save data! Status: ${response.status}, Response: ${errorDetails}`
-				);
-			}
-		} catch (error) {
-			console.error('Error:', error);
-		}
-	}
+		const fetch = await createUser(user)
+		console.log(user);
+		
 
 	return new Response('', { status: 200 });
+}
 }

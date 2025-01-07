@@ -8,28 +8,27 @@ const createUser = async (req, res) => {
 
 		if (!clerkUserId) {
 			return res
-				.status(401)
-				.json({ error: 'Unauthorized: Clerk user ID is missing.' });
+			.status(401)
+			.json({ error: 'Unauthorized: Clerk user ID is missing.' });
 		}
-
+		
 		let user = await User.findOne({ clerkUserId });
-
+		
 		if (user) {
 			return res.status(200).json({
 				message: 'User already exists.',
 				user,
 			});
 		}
+		const { role , userName , email } = req.body;
 
-		const { role, name, email } = req.body;
-
-		user = new User({ clerkUserId, role });
+		user = new User({ clerkUserId, role , userName , email });
 		await user.save();
 
 
 		let newStudent = null;
 		if (role === 'student') {
-			if (!name || !email) {
+			if (!userName || !email) {
 				return res
 					.status(400)
 					.json({
@@ -39,7 +38,7 @@ const createUser = async (req, res) => {
 
 			newStudent = new Student({
 				clerkUserId,
-				name,
+				userName,
 				email,
 			});
 			await newStudent.save();
