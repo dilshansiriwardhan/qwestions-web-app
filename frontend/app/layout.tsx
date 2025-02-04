@@ -1,13 +1,9 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import { Poppins } from 'next/font/google';
-import {
-	ClerkProvider,
-	SignInButton,
-	SignedIn,
-	SignedOut,
-	UserButton,
-} from '@clerk/nextjs';
+import { ClerkProvider } from '@clerk/nextjs';
+import { Providers } from './providers';
+
 const poppins = Poppins({
 	weight: ['400', '500', '600', '700'],
 	subsets: ['latin'],
@@ -26,7 +22,9 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<ClerkProvider publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY} >
+		<ClerkProvider
+			publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}
+		>
 			<html lang='en' data-theme='dark'>
 				<head>
 					<meta
@@ -35,9 +33,9 @@ export default function RootLayout({
 					/>
 				</head>
 				<body
-					className={`${poppins.className} antialiased purple-dark`}
+					className={`${poppins.className} antialiased purple-dark `}
 				>
-					<main>{children}</main>
+					<main><Providers>{children}</Providers></main>
 				</body>
 			</html>
 		</ClerkProvider>

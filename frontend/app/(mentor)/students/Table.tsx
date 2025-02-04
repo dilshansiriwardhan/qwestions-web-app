@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
 	Table,
 	TableHeader,
@@ -27,6 +27,7 @@ type ColumnType = {
 };
 
 const LastTestTable: React.FC = () => {
+	const [students, setStudents] = useState<RowType[]>([]);
 	const rows: RowType[] = [
 		{
 			key: 1,
@@ -84,6 +85,44 @@ const LastTestTable: React.FC = () => {
 		},
 	];
 
+	const getMentors = async () => {
+		try {
+			const users = await fetch(
+				`${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/student`
+			);
+
+			const data = await users.json();
+
+			if (data) {
+				const usersArray = data.map(
+					(
+						student: {
+							name: string;
+							email: string;
+							indexNumber: string;
+						},
+						index: number
+					) => ({
+						key: index,
+						status: 'green',
+						name: student.name,
+						indexNum: student.indexNumber,
+						email: student.email,
+						phoneNumber: '',
+						marks: '',
+					})
+				);
+
+				setStudents(usersArray);
+			}
+		} catch (error) {
+			console.log(error);
+		}
+	};
+	useEffect(() => {
+		getMentors();
+	}, []);
+
 	const columns: ColumnType[] = [
 		{
 			key: 'status',
@@ -130,7 +169,7 @@ const LastTestTable: React.FC = () => {
 						</TableColumn>
 					)}
 				</TableHeader>
-				<TableBody items={rows}>
+				<TableBody items={students}>
 					{(item) => (
 						<TableRow key={item.key}>
 							{(columnKey) => {

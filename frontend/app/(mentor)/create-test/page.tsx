@@ -20,7 +20,7 @@ const Create = () => {
 						</div>
 					</div>
 					<div className='bg- rounded-3xl col-span-4 md:col-span-2 row-start-4 md:row-start-3 bg-gradient-to-r from-[#00FF87] from-20% to-[#4C8DF6]'>
-						<Link href={'/create-test/create/instructions'}>
+						<Link href={'/create-test/create/configure'}>
 							<div className='w-full h-full lg:rounded-3xl md:rounded-xl'>
 								<h1 className='font-extrabold absolute text-content3 m-5 text-2xl'>
 									Create a Test

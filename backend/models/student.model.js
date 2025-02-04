@@ -5,9 +5,10 @@ const studentSchema = new mongoose.Schema({
 		type: String,
 		ref: 'User',
 		required: true,
+		unique: true,
 	},
-	name: { type: String, required: true },
-	email: { type: String, required: true },
+	name: { type: String, required: true, trim: true },
+	email: { type: String, required: true, unique: true },
 	phoneNumber: { type: String },
 	indexNumber: { type: String, unique: true },
 	mentor: {
@@ -18,6 +19,7 @@ const studentSchema = new mongoose.Schema({
 			},
 		],
 	},
+	groupIds: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Group' }],
 });
 
 // Middleware to generate indexNumber automatically

@@ -9,11 +9,15 @@ const mentorSchema = new mongoose.Schema({
 	},
 	name: { type: String, required: true },
 	email: { type: String, required: true },
-	phoneNumber: { type: String, required: true },
-	organization: {
-		type: mongoose.Schema.Types.ObjectId,
-		ref: 'Organization',
-	},
+	phoneNumber: { type: String },
+	subjectCategories: [{ type: String, trim: true, unique: true }],
+	organizations: [
+		{
+			type: mongoose.Schema.Types.ObjectId,
+			ref: 'Organization',
+		},
+	],
+	exams: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Exam' }],
 });
 
 const Mentor = mongoose.model('Mentor', mentorSchema);

@@ -1,5 +1,6 @@
 const express = require('express');
 const { createUser } = require('../controllers/user.controller');
+const { updateUser } = require('../controllers/update.controller');
 const User = require('../models/user.model.js');
 
 const router = express.Router();
@@ -13,5 +14,7 @@ router.get('/', async (req, res) => {
 		res.status(500).json({ error: error.message });
 	}
 });
+
+router.put('/:id', updateUser );
 
 module.exports = router;

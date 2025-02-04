@@ -1,6 +1,6 @@
 const express = require('express');
-const Student = require('./models/Student');
-const Mentor = require('./models/Mentor'); 
+const Student = require('../models/student.model.js');
+const Mentor = require('../models/mentor.model.js');
 const router = express.Router();
 
 // Create a new student

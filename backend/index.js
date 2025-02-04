@@ -11,6 +11,7 @@ const examRoutes = require('./routes/exams.routes');
 const mentorRoutes = require('./routes/mentors.routes');
 const organizationRoutes = require('./routes/organizations.routes');
 const userRoutes = require('./routes/users.routes');
+const studentRoutes = require('./routes/students.routes');
 
 // Load environment variables
 dotenv.config();
@@ -37,13 +38,13 @@ app.use(express.urlencoded({ extended: false }));
 app.use(clerkMiddleware())
 
 
-
 // Routes
 app.use('/api/user', userRoutes);
 app.use('/api/question', questionRoutes);
 app.use('/api/exam', examRoutes);
 app.use('/api/mentor', mentorRoutes);
 app.use('/api/organization', organizationRoutes);
+app.use('/api/student', studentRoutes);
 
 app.listen(5000, () => {
   console.log(`Server running at http://localhost:${5000}`);

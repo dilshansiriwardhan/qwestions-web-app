@@ -4,6 +4,8 @@ import { Input } from '@nextui-org/input';
 import {
 	Button,
 	getKeyValue,
+	Select,
+	SelectItem,
 	Table,
 	TableBody,
 	TableCell,
@@ -11,6 +13,8 @@ import {
 	TableHeader,
 	TableRow,
 } from '@nextui-org/react';
+import { useAuth } from '@clerk/nextjs';
+import { Anybody } from 'next/font/google';
 
 type RowType = {
 	key: number;
@@ -25,42 +29,67 @@ type ColumnType = {
 	label: string;
 };
 
+type Roles = 'admin' | 'student' | 'organization' | 'mentor';
+
+type SelectData = {
+	key: Roles;
+	label: Roles;
+};
+
 const Mentor = () => {
-	const [name, setName] = useState('');
-	const [email, setEmail] = useState('');
-	const [phoneNumber, setPhone] = useState('');
+	// const [name, setName] = useState('');
+	// const [email, setEmail] = useState('');
+	// const [phoneNumber, setPhone] = useState('');
 	const [users, setUsers] = useState<RowType[]>([]);
+	const Roles: SelectData[] = [
+		{
+			key: 'admin',
+			label: 'admin',
+		},
+		{
+			key: 'student',
+			label: 'student',
+		},
+		{
+			key: 'organization',
+			label: 'organization',
+		},
+		{
+			key: 'mentor',
+			label: 'mentor',
+		},
+	];
 
-	const addMentor = async () => {
-		try {
-			const response = await fetch(
-				`${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/mentor`,
-				{
-					method: 'POST',
-					headers: {
-						'Content-Type': 'application/json',
-					},
-					body: JSON.stringify({ name, email, phoneNumber }),
-				}
-			);
+	// const addMentor = async () => {
+	// 	try {
+	// 		const response = await fetch(
+	// 			`${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/mentor`,
+	// 			{
+	// 				method: 'POST',
+	// 				headers: {
+	// 					'Content-Type': 'application/json',
+	// 				},
+	// 				body: JSON.stringify({ name, email, phoneNumber }),
+	// 			}
+	// 		);
 
-			if (!response.ok) {
-				throw new Error('Failed to add mentor');
-			}
+	// 		if (!response.ok) {
+	// 			throw new Error('Failed to add mentor');
+	// 		}
 
-			const data = await response.json();
-			alert('Mentor added successfully');
-			console.log(data);
+	// 		const data = await response.json();
+	// 		alert('Mentor added successfully');
+	// 		console.log(data);
 
-			// Reset form fields
-			setName('');
-			setEmail('');
-			setPhone('');
-		} catch (error) {
-			console.error(error);
-			alert('Error adding mentor');
-		}
-	};
+	// 		// Reset form fields
+	// 		setName('');
+	// 		setEmail('');
+	// 		setPhone('');
+	// 	} catch (error) {
+	// 		console.error(error);
+	// 		alert('Error adding mentor');
+	// 	}
+	// };
 
 	const getMentors = async () => {
 		try {
@@ -69,7 +98,7 @@ const Mentor = () => {
 			);
 
 			const data = await users.json();
-			
+
 			if (data) {
 				const usersArray = data.map(
 					(
@@ -102,40 +131,38 @@ const Mentor = () => {
 	useEffect(() => {
 		console.log(users);
 	}, [users]);
+	const { getToken } = useAuth();
 
-	// useEffect(() => {
-	// 	const fetchExams = async () => {
-	// 		try {
-	// 			const examResponse = await fetch(
-	// 				`${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/exam/${examId}`
-	// 			);
-	// 			if (!examResponse.ok) {
-	// 				throw new Error('Network response was not ok');
-	// 			}
+	const changeRole = async (newRole: string, id: string) => {
+		console.log('Selected currentKey:', newRole);
+		const token = await getToken();
+		try {
+			const response = await fetch(
+				`${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/user/${id}`,
+				{
+					method: 'PUT',
+					headers: {
+						'Content-Type': 'application/json',
+						Authorization: `Bearer ${token}`,
+					},
+					body: JSON.stringify({ role: newRole }),
+				}
+			);
 
-	// 			const data: Exam = await examResponse.json();
-	// 			setExamName(data.examName);
+			if (!response.ok) {
+				const errorDetails = await response.json(); 
+				throw new Error(`Failed to update role: ${JSON.stringify(errorDetails)}`);
+			}
 
-	// 			const questionResponse = await fetch(
-	// 				`${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/question/${examId}`
-	// 			);
-	// 			if (!questionResponse.ok) {
-	// 				throw new Error('Questions response was not ok');
-	// 			}
-
-	// 			const questionData: Question[] = await questionResponse.json();
-	// 			setQuestions(questionData);
-	// 		} catch (error: any) {
-	// 			setError(error.message);
-	// 		}
-	// 	};
-
-	// 	fetchExams();
-	// }, [examId]);
-
+			const updatedUser = await response.json();
+			console.log('User role updated successfully', updatedUser);
+		} catch (error) {
+			console.error('Error updating role:', error);
+		}
+	};
 	return (
 		<div>
-			<div>
+			{/* <div>
 				<h1>Add Mentor</h1>
 				<div className='flex gap-10'>
 					<Input
@@ -158,7 +185,7 @@ const Mentor = () => {
 					/>
 					<Button onClick={addMentor}>Add</Button>
 				</div>
-			</div>
+			</div> */}
 			<div>
 				<Table aria-label='Example table with dynamic content'>
 					<TableHeader columns={columns}>
@@ -171,11 +198,53 @@ const Mentor = () => {
 					<TableBody items={users}>
 						{(item) => (
 							<TableRow key={item.key}>
-								{(columnKey) => (
-									<TableCell>
-										{getKeyValue(item, columnKey)}
-									</TableCell>
-								)}
+								{(columnKey) => {
+									if (columnKey === 'role') {
+										return (
+											<TableCell>
+												{/* <SelectRole
+													data={Roles}
+													default={item.role}
+													key={columnKey}
+												/> */}
+												<Select
+													isDisabled={item.role === 'admin'}
+													className='max-w-xs'
+													defaultSelectedKeys={[
+														item.role,
+													]}
+													aria-label='Select Role'
+													placeholder='Select an Role'
+													onSelectionChange={(
+														keys
+													) => {
+														const currentKey: string =
+															keys.currentKey ??
+															' ';
+														changeRole(
+															currentKey,
+															item.id
+														);
+													}}
+												>
+													{Roles.map((data) => (
+														<SelectItem
+															key={data.key}
+														>
+															{data.label}
+														</SelectItem>
+													))}
+												</Select>
+											</TableCell>
+										);
+									}
+
+									return (
+										<TableCell>
+											{getKeyValue(item, columnKey)}
+										</TableCell>
+									);
+								}}
 							</TableRow>
 						)}
 					</TableBody>
@@ -185,13 +254,29 @@ const Mentor = () => {
 	);
 };
 
+const SelectRole = ({
+	data,
+	default: defaultRole,
+}: {
+	data: SelectData[];
+	default: string;
+}) => {
+	return (
+		<Select
+			className='max-w-xs'
+			defaultSelectedKeys={[defaultRole]}
+			placeholder='Select an Role'
+		>
+			{data.map((data) => (
+				<SelectItem key={data.key}>{data.label}</SelectItem>
+			))}
+		</Select>
+	);
+};
+
 export default Mentor;
 
 const columns = [
-	{
-		key: 'id',
-		label: 'Id',
-	},
 	{
 		key: 'userName',
 		label: 'Name',

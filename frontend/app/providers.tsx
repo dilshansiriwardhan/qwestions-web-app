@@ -1,11 +1,15 @@
-// app/providers.tsx
+'use client';
 
-import {NextUIProvider} from '@nextui-org/react'
+import React from 'react';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { NextUIProvider } from '@nextui-org/react';
 
-export function Providers({children}: { children: React.ReactNode }) {
+export function Providers({ children }: { children: React.ReactNode }) {
+  const [queryClient] = React.useState(() => new QueryClient());
+
   return (
     <NextUIProvider>
-      {children}
+      <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
     </NextUIProvider>
-  )
+  );
 }

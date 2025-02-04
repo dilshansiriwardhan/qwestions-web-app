@@ -8,11 +8,9 @@ export const mainRoutes = [
 ];
 
 export const steps = [
-    { name: 'Instruction Page', route: '/create-test/create/instructions' , progress:5},
-    { name: 'Questions Manager', route: '/create-test/create/question-manager' , progress:10},
-    { name: 'Access Settings', route: '/create-test/create/access-settings' , progress:50},
-    { name: 'Grading', route: '/create-test/create/grading' , progress:60},
-    { name: 'Time Allocation', route: '/create-test/create/time-allocation' , progress:80},
-    { name: 'Preview', route: '/create-test/create/preview' , progress:100},
+    { name: 'Configure', route: '/create-test/create/configure' , progress:20},
+    { name: 'Questions Manager', route: '/create-test/create/question-manager' , progress:50},
+    { name: 'Preview', route: '/create-test/create/preview' , progress:80},
+    { name: 'Publish', route: '/create-test/create/publish' , progress:100},
   ];
   
